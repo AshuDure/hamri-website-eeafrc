@@ -9,6 +9,9 @@ import com.ethiofamilyresource.backend.service.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class PersonServiceImpl implements PersonService {
@@ -27,5 +30,12 @@ public class PersonServiceImpl implements PersonService {
                  .orElseThrow(() ->
                          new ResourceNotFoundException("Person doesn't exist with given id: " + personId));
         return PersonMapper.mapToPersonDto(person);
+    }
+
+    @Override
+    public List<PersonDto> getAllPersons() {
+        List<Person> persons = personRepository.findAll();
+        return persons.stream().map((person) -> PersonMapper.mapToPersonDto(person))
+                .collect(Collectors.toList());
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/persons")
@@ -26,5 +28,12 @@ public class PersonController {
     public ResponseEntity<PersonDto> getPersonById(@PathVariable("id") Long personId){
         PersonDto personDto = personService.getPersonById(personId);
         return ResponseEntity.ok(personDto);
+    }
+
+    // Build GET ALL Person REST API
+    @GetMapping
+    public ResponseEntity<List<PersonDto>> getAllPersons(){
+        List<PersonDto> persons = personService.getAllPersons();
+        return ResponseEntity.ok(persons);
     }
 }

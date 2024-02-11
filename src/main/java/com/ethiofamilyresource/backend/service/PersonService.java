@@ -4,4 +4,6 @@ import com.ethiofamilyresource.backend.dto.PersonDto;
 
 public interface PersonService {
     PersonDto createPerson(PersonDto personDto);
+
+    PersonDto getPersonById(Long personId);
 }

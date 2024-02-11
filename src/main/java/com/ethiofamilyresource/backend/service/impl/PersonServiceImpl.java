@@ -52,4 +52,13 @@ public class PersonServiceImpl implements PersonService {
         Person updatedPersonObj = personRepository.save(person);
         return PersonMapper.mapToPersonDto(updatedPersonObj);
     }
+
+    @Override
+    public void deletePerson(Long personId) {
+        Person person = personRepository.findById(personId).orElseThrow(
+                () -> new ResourceNotFoundException("Person doesn't exist with given id: " + personId)
+        );
+
+        personRepository.deleteById(personId);
+    }
 }

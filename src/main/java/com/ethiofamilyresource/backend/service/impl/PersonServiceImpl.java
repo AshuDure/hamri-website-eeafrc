@@ -38,4 +38,18 @@ public class PersonServiceImpl implements PersonService {
         return persons.stream().map((person) -> PersonMapper.mapToPersonDto(person))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public PersonDto updatePerson(Long personId, PersonDto updatedPerson) {
+        Person person = personRepository.findById(personId).orElseThrow(
+                 () -> new ResourceNotFoundException("Person doesn't exist with given id: " + personId)
+         );
+        person.setFirstName(updatedPerson.getFirstName());
+        person.setLastName(updatedPerson.getLastName());
+        person.setEmail(updatedPerson.getEmail());
+        person.setPhoneNumber(updatedPerson.getPhoneNumber());
+
+        Person updatedPersonObj = personRepository.save(person);
+        return PersonMapper.mapToPersonDto(updatedPersonObj);
+    }
 }

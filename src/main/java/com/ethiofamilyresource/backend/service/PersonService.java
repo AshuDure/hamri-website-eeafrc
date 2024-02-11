@@ -10,4 +10,6 @@ public interface PersonService {
     PersonDto getPersonById(Long personId);
 
     List<PersonDto> getAllPersons();
+
+    PersonDto updatePerson(Long personId, PersonDto updatedPerson);
 }
